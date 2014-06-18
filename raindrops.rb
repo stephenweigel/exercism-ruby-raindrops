@@ -8,11 +8,14 @@ module Raindrops
     return number.to_s if primes.empty?
 
     primes.map do |p|
-      response = ''
-      response = 'Pling' if p == 3
-      response = 'Plang' if p == 5
-      response = 'Plong' if p == 7
-      response
+      case p
+      when 3
+        'Pling'
+      when 5
+        'Plang'
+      when 7
+        'Plong'
+      end
     end.join
   end
 end
