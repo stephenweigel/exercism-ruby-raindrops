@@ -4,18 +4,23 @@ module Raindrops
   module_function
 
   def convert(number)
-    primes = number.prime_division.flatten & [3, 5, 7]
-    return number.to_s if primes.empty?
+    return number.to_s if prime_factors(number).empty?
+    prime_factors(number).map { |factor| word_for(factor) }.join
+  end
 
-    primes.map do |p|
-      case p
-      when 3
-        'Pling'
-      when 5
-        'Plang'
-      when 7
-        'Plong'
-      end
-    end.join
+  def prime_factors(number)
+    conditions.keys.select { |x| number % x == 0 }
+  end
+
+  def word_for(number)
+    conditions.fetch(number)
+  end
+
+  def conditions
+    {
+      3 => 'Pling',
+      5 => 'Plang',
+      7 => 'Plong'
+    }
   end
 end
